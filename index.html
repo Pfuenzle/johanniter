@@ -72,44 +72,32 @@
         strRawContents = strRawContents.replace("\r", "");
       var arrLines = strRawContents.split("\n");
       //alert("File " + oFrame.src + " has " + arrLines.length + " lines");
-      ind = 0
-      var title = ""
-      var autor = ""
-      var kat = ""
-      var ort = ""
+
       for (var i = 0; i < arrLines.length; i++) {
-        if (ind == 0) {
-          title = arrLines[i];
-          ind++;
-        } else if (ind == 1) {
-          autor = arrLines[i];
-          ind++;
-        } else if (ind == 2) {
-          kat = arrLines[i];
-          ind++;
-        } else if (ind == 3) {
-          ort = arrLines[i];
-          var tableRef = document.getElementById('tabelle').getElementsByTagName('tbody')[0];
-          var newRow = tableRef.insertRow();
+        var spl = arrLines[i].split("\t");
+        var title = spl[0];
+        var autor = spl[1];
+        var kat = spl[2];
+        var ort = spl[3];
 
-          var newCell = newRow.insertCell(0);
-          var newText = document.createTextNode(title);
-          newCell.appendChild(newText);
+        var tableRef = document.getElementById('tabelle').getElementsByTagName('tbody')[0];
+        var newRow = tableRef.insertRow();
 
-          var newCell = newRow.insertCell(1);
-          var newText = document.createTextNode(autor);
-          newCell.appendChild(newText);
+        var newCell = newRow.insertCell(0);
+        var newText = document.createTextNode(title);
+        newCell.appendChild(newText);
 
-          var newCell = newRow.insertCell(2);
-          var newText = document.createTextNode(kat);
-          newCell.appendChild(newText);
+        var newCell = newRow.insertCell(1);
+        var newText = document.createTextNode(autor);
+        newCell.appendChild(newText);
 
-          var newCell = newRow.insertCell(3);
-          var newText = document.createTextNode(ort);
-          newCell.appendChild(newText);
+        var newCell = newRow.insertCell(2);
+        var newText = document.createTextNode(kat);
+        newCell.appendChild(newText);
 
-          ind = 0;
-        }
+        var newCell = newRow.insertCell(3);
+        var newText = document.createTextNode(ort);
+        newCell.appendChild(newText);
       }
     }
   </script>

@@ -1,13 +1,3 @@
-asdf
-fdsa
-123
-pter1234
-michel
-suppe
-mal
-geteilt
-plus
-aldi
-petterson
-findus
-mal
+asdf	fdsa	123	pter1234
+michel	suppe	mal	geteilt	
+plus	aldi	petterson	findus
