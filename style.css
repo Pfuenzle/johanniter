@@ -46,10 +46,10 @@
 }
 
 #tabelle thead tr th {
-  width: 33%;
+  width: 25%;
   text-align: left;
 }
 
 #tabelle tbody tr th {
-  width: 33%;
+  width: 25%;
 }
