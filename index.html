@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script>
+    function search() {
+      // Declare variables
+      var input, filter, ul, li, a, i, txtValue;
+      input = document.getElementById('myInput');
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("mainList");
+      li = ul.getElementsByTagName('li');
+
+      var type_e = document.getElementById("search_type");
+      var type = type_e.options[type_e.selectedIndex].value;
+
+      if (type == "titel") {
+        for (i = 0; i < li.length; i++) {
+          a = li[i].getElementsByTagName("a")[0];
+          txtValue = a.textContent || a.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+          } else {
+            li[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
+  <script>
+    function reset() {
+      ul = document.getElementById("mainList");
+      li = ul.getElementsByTagName('li');
+      for (i = 0; i < li.length; i++) {
+        li[i].style.display = "";
+      }
+      search()
+    }
+  </script>
+  <script>
+    function loadTXT() {
+      var oFrame = document.getElementById("frmFile");
+      var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML;
+      while (strRawContents.indexOf("\r") >= 0)
+        strRawContents = strRawContents.replace("\r", "");
+      var arrLines = strRawContents.split("\n");
+      alert("File " + oFrame.src + " has " + arrLines.length + " lines");
+      ind = 0
+      var title = ""
+      var autor = ""
+      var kat = ""
+      for (var i = 0; i < arrLines.length; i++) {
+        if(ind == 0){
+          title = arrLines[i];
+          ind++;
+        } else if(ind == 1){
+          autor = arrLines[i];
+          ind++;
+        } else if(ind == 2){
+          kat = arrLines[i];
+          var tableRef = document.getElementById('tabelle').getElementsByTagName('tbody')[0];
+          var newRow   = tableRef.insertRow();
+          var newCell  = newRow.insertCell(0);
+          var newText  = document.createTextNode(title);
+          newCell.appendChild(newText);
+          var newCell  = newRow.insertCell(1);
+          var newText  = document.createTextNode(autor);
+          newCell.appendChild(newText);
+          var newCell  = newRow.insertCell(2);
+          var newText  = document.createTextNode(kat);
+          newCell.appendChild(newText);
+          ind = 0;
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <iframe id="frmFile" src="buecher.txt" onload="loadTXT();" style="display: none;"></iframe>
+  <input type="text" id="myInput" onkeyup="search()" placeholder="Suche...">
+  <table id="tabelle" cellpadding="0" cellspacing="0" width="100%" border="0">
+    <thead>
+      <tr>
+        <th>Titel</th>
+        <th>Autor</th>
+        <th>Kategorie</th>
+      </tr>
+    </thead>
+    <tbody id="tablebody">
+    <tr>
+    </tr>
+</tbody>
+  </table>
+</body>
+
+</html>
